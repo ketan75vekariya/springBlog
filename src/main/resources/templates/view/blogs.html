@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.themeleaf.org">
   <!--Head-->
-  <head th:replace="/fragments/head :: head" />
+  <head th:replace="view/fragments/head :: head" />
   <body>
     <!-- Responsive navbar-->
-    <div th:replace="fragments/navigation :: navigation"></div>
+    <div th:replace="view/fragments/navigation :: navigation"></div>
     <!-- Page header with logo and tagline-->
-    <header th:replace="/fragments/header :: header" />
+    <header th:replace="view/fragments/header :: header" />
     <!-- Page content-->
     <div class="container">
       <div class="row">
@@ -194,6 +194,6 @@
       </div>
     </div>
     <!-- Footer-->
-    <footer th:replace="/fragments/footer :: footer" />
+    <footer th:replace="view/fragments/footer :: footer" />
   </body>
 </html>

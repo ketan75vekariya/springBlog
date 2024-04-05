@@ -15,26 +15,26 @@ public class ControllerHome {
  @GetMapping("/home")
   public String home(Model model){
     model.addAttribute("currentPage", "home");
-    return "home";
+    return "view/home";
   }
   @GetMapping("/about")
   public String about(Model model){
     model.addAttribute("currentPage", "about");
-    return "about";
+    return "view/about";
   }
   @GetMapping("/contact")
   public String contact(Model model){
     model.addAttribute("currentPage", "contact");
-    return "contact";
+    return "view/contact";
   }
   @GetMapping("/blogs")
   public String blogs(Model model){
     model.addAttribute("currentPage", "blog");
-    return "blogs";
+    return "view/blogs";
   }
   @GetMapping("/blog-post")
   public String blogPost(Model model){
     model.addAttribute("currentPage", "blog");
-    return "blog_post";
+    return "view/blog_post";
   }
 }
