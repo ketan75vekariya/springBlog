@@ -1,4 +1,4 @@
-package com.sringblogV1.springBlog;
+package com.sringblogv1.springblog;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
