@@ -1,5 +1,6 @@
 package com.sringblogv1.springblog.model;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -25,7 +26,11 @@ public class Account {
 
   private String password;
 
-  private String firstname; 
+  private String firstname;
+  
+  private String lastname;
+
+  private LocalDateTime createdAt;
 
   @OneToMany(mappedBy = "account")
   private List<Post> posts;
