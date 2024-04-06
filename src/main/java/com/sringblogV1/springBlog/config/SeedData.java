@@ -18,6 +18,7 @@ public class SeedData implements CommandLineRunner {
 
   @Autowired
   private AccountService accountService;
+  
 
   @Override
   public void run(String... args) throws Exception {
