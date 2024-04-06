@@ -12,7 +12,7 @@ public class ControllerHome {
   // Controller method for the isActivePage logic (not mapped to any HTTP endpoint)
   
 
- @GetMapping("/home")
+ @GetMapping("/")
   public String home(Model model){
     model.addAttribute("currentPage", "home");
     return "view/home";
