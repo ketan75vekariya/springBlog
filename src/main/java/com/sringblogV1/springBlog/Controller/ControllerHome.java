@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.sringblogv1.springblog.model.Category;
 import com.sringblogv1.springblog.model.Post;
+import com.sringblogv1.springblog.services.CategoryService;
 import com.sringblogv1.springblog.services.PostService;
 
 
@@ -17,6 +19,8 @@ public class ControllerHome {
   @Autowired
   private PostService postService;
   
+  @Autowired
+  private CategoryService categoryService;
   // Controller method for the isActivePage logic (not mapped to any HTTP endpoint)
   
 
@@ -48,6 +52,10 @@ public class ControllerHome {
       model.addAttribute("firstPost", firstPost);
   }
     model.addAttribute("posts", posts);
+    
+    List<Category> categories = categoryService.getAll();
+    model.addAttribute("categories", categories);
+
     return "view/blogs";
   }
   @GetMapping("/blog-post")

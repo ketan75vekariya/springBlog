@@ -7,8 +7,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import com.sringblogv1.springblog.model.Account;
+import com.sringblogv1.springblog.model.Category;
 import com.sringblogv1.springblog.model.Post;
 import com.sringblogv1.springblog.services.AccountService;
+import com.sringblogv1.springblog.services.CategoryService;
 import com.sringblogv1.springblog.services.PostService;
 @Component
 public class SeedData implements CommandLineRunner {
@@ -18,6 +20,9 @@ public class SeedData implements CommandLineRunner {
 
   @Autowired
   private AccountService accountService;
+
+  @Autowired
+  private CategoryService categoryService;
   
 
   @Override
@@ -39,6 +44,15 @@ public class SeedData implements CommandLineRunner {
 
     accountService.save(account01);
     accountService.save(account02);
+
+    Category category01 = new Category();
+    Category category02 = new Category();
+
+    category01.setCategory("JavaScript");
+    category02.setCategory("Spring Boot");
+
+    categoryService.save(category01);
+    categoryService.save(category02);
 
 
     List<Post> posts= postService.getAll();

@@ -1810,3 +1810,6 @@ Caused by: org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Wrong user name
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:522)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 67 more
+2024-04-07 10:42:32.675569+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM POST CATEGORY [*]ACCOUNT"; SQL statement:
+SELECT * FROM POST CATEGORY ACCOUNT [42000-224]
