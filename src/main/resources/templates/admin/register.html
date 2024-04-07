@@ -19,13 +19,19 @@
                     </h3>
                   </div>
                   <div class="card-body">
-                    <form>
+                    <form
+                      action="#"
+                      th:action="@{/adminadduser}"
+                      th:object="${account}"
+                      method="post"
+                    >
                       <div class="row mb-3">
                         <div class="col-md-6">
                           <div class="form-floating mb-3 mb-md-0">
                             <input
                               class="form-control"
-                              id="inputFirstName"
+                              id="firstname"
+                              th:field="*{firstname}"
                               type="text"
                               placeholder="Enter your first name"
                             />
@@ -36,7 +42,8 @@
                           <div class="form-floating">
                             <input
                               class="form-control"
-                              id="inputLastName"
+                              id="lastname"
+                              th:field="*{lastname}"
                               type="text"
                               placeholder="Enter your last name"
                             />
@@ -47,7 +54,8 @@
                       <div class="form-floating mb-3">
                         <input
                           class="form-control"
-                          id="inputEmail"
+                          id="email"
+                          th:field="*{email}"
                           type="email"
                           placeholder="name@example.com"
                         />
@@ -59,6 +67,7 @@
                             <input
                               class="form-control"
                               id="inputPassword"
+                              th:field="*{password}"
                               type="password"
                               placeholder="Create a password"
                             />
@@ -81,9 +90,12 @@
                       </div>
                       <div class="mt-4 mb-0">
                         <div class="d-grid">
-                          <a class="btn btn-primary btn-block" href="login.html"
-                            >Create Account</a
+                          <button
+                            type="submit"
+                            class="btn btn-primary btn-block"
                           >
+                            Create Account
+                          </button>
                         </div>
                       </div>
                     </form>

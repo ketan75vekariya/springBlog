@@ -6,9 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.sringblogv1.springblog.model.Account;
 import com.sringblogv1.springblog.services.AccountService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 public class CantrollerAccount {
@@ -33,6 +37,16 @@ public class CantrollerAccount {
   @GetMapping("/adminadduser")
   public String register(Model model){
     model.addAttribute("currentPage", "register");
+    Account account = new Account();
+    model.addAttribute("account", account);
     return "admin/register";
   }
+
+  @PostMapping("/adminadduser")
+  public String postMethodName(@ModelAttribute Account account) {
+      accountService.save(account);
+      
+      return "admin/register";
+  }
+  
 }
