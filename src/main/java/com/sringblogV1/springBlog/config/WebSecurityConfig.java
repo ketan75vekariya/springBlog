@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -14,11 +16,33 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
+  @SuppressWarnings("removal")
   @Bean
   SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
     return http
               .authorizeHttpRequests(auth->{
-                auth.requestMatchers("/","/assets/**","/css/**","/js/**","/about","/contact","/blogs", "/blog-post").permitAll();
+                try {
+                    auth.requestMatchers("/", "/assets/**", "/css/**", "/js/**", "/about", "/contact", "/blogs", "/blog-post", "/admin/assets/**", "/admin/css/**", "/admin/js/**")
+                            .permitAll()
+                            .anyRequest()
+                            .authenticated()
+                            .and()
+                            .formLogin(login -> login
+                                    .loginPage("/login")
+                                    .loginProcessingUrl("/login")
+                                    .usernameParameter("email")
+                                    .passwordParameter("password")
+                                    .defaultSuccessUrl("/admin", true)
+                                    .failureUrl("/login?error")
+                                    .permitAll())
+                            .logout(logout -> logout
+                                    .logoutUrl("/logout")
+                                    .logoutSuccessUrl("/logout?success"))
+                            .httpBasic(withDefaults());
+                } catch (Exception e) {
+                  e.printStackTrace();
+                }
+
                 /*
                 auth.requestMatchers("/assets/**").permitAll();
                 auth.requestMatchers("/css/**").permitAll();
@@ -30,6 +54,13 @@ public class WebSecurityConfig {
               }).formLogin(withDefaults())
               .build();
   }
+
+  @Bean
+  public static PasswordEncoder passwordEncoder(){
+    return new BCryptPasswordEncoder();
+  }
+
+
     @SuppressWarnings("removal")
     @Bean
     @Order(1)
