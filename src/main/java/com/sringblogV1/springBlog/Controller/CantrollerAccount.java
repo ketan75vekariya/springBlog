@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import com.sringblogv1.springblog.model.Account;
 import com.sringblogv1.springblog.services.AccountService;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
@@ -49,4 +48,10 @@ public class CantrollerAccount {
       return "admin/register";
   }
   
+  @GetMapping("/login")
+  public String login(Model model){
+    model.addAttribute("currentPage", "register");
+    return "admin/login";
+  }
+
 }
