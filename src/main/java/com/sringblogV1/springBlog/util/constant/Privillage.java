@@ -4,10 +4,10 @@ public enum Privillage {
     RESET_ANY_USER_PASSWORD(1l, "RESET_ANY_USER_PASSWORD"),
     ACCESS_ADMIN_PANEL(2l, "ACCESS_ADMIN_PANEL");
 
-    private final Long Id;
-    private final String privillage;
+    private Long Id;
+    private String privillage;
 
-    Privillage(Long Id, String privillage) {
+    private Privillage(Long Id, String privillage) {
         this.Id = Id;
         this.privillage = privillage;
     }

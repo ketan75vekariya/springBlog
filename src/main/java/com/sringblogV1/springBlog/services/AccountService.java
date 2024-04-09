@@ -37,7 +37,9 @@ public class AccountService implements UserDetailsService{
       account.setCreatedAt(LocalDateTime.now());
     }
     account.setPassword(passwordEncoder.encode(account.getPassword()));
+    if(account.getRole() == null){
     account.setRole(Roles.USER.getRole());
+  }
     return accountRepository.save(account);
   }
 
