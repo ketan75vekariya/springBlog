@@ -30,6 +30,8 @@ public class Account {
   
   private String lastname;
 
+  private String role;
+
   private LocalDateTime createdAt;
 
   @OneToMany(mappedBy = "account")

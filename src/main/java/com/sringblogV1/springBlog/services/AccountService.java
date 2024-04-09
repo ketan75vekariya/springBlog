@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.sringblogv1.springblog.model.Account;
 import com.sringblogv1.springblog.repositories.AccountRepository;
+import com.sringblogv1.springblog.util.constant.Roles;
 
 @Service
 public class AccountService implements UserDetailsService{
@@ -36,6 +37,7 @@ public class AccountService implements UserDetailsService{
       account.setCreatedAt(LocalDateTime.now());
     }
     account.setPassword(passwordEncoder.encode(account.getPassword()));
+    account.setRole(Roles.USER.getRole());
     return accountRepository.save(account);
   }
 
@@ -48,7 +50,7 @@ public class AccountService implements UserDetailsService{
     }
     Account account = optionalAccount.get();
     List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-    grantedAuthorities.add(new SimpleGrantedAuthority("Allow"));
+    grantedAuthorities.add(new SimpleGrantedAuthority(account.getRole()));
     return new User(account.getEmail(), account.getPassword(), grantedAuthorities);
   }
 }

@@ -1,4 +1,4 @@
-package com.sringblogv1.springblog.config;
+package com.sringblogv1.springblog.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
