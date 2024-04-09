@@ -14,7 +14,7 @@
         <div class="col-lg-8">
           <!-- Featured blog post-->
           <div class="card mb-4" th:if="${firstPost}">
-            <a href="#!"
+            <a th:href="@{'/blog-post/' + ${firstPost.id}}"
               ><img
                 class="card-img-top"
                 src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg"
@@ -24,12 +24,15 @@
               <div class="small text-muted" th:text="${firstPost.createdAt}">
                 Date
               </div>
-              <h2 class="card-title" th:text="${firstPost.title}">Title</h2>
+              <a th:href="@{'/blog-post/' + ${firstPost.id}}"
+                ><h2 class="card-title" th:text="${firstPost.title}">
+                  Title
+                </h2></a
+              >
               <p class="card-text" th:text="${firstPost.body}">Body</p>
               <a
                 class="btn btn-primary"
-                th:id="${firstPost.id}"
-                href="/blog-post"
+                th:href="@{'/blog-post/' + ${firstPost.id}}"
                 >Read more →</a
               >
             </div>
@@ -42,17 +45,28 @@
             <div class="col-lg-6" th:each="posts:${posts}">
               <!-- Blog post-->
               <div class="card mb-4">
-                <a href="#!"
+                <a th:href="@{'/blog-post/' + ${posts.id}}"
                   ><img
                     class="card-img-top"
                     src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg"
                     alt="..."
                 /></a>
                 <div class="card-body">
-                  <div class="small text-muted">January 1, 2023</div>
-                  <h2 class="card-title h4" th:text="${posts.title}">Title</h2>
+                  <div
+                    class="small text-muted"
+                    th:text="${posts.createdAt}"
+                  ></div>
+                  <a th:href="@{'/blog-post/' + ${posts.id}}"
+                    ><h2 class="card-title h4" th:text="${posts.title}">
+                      Title
+                    </h2></a
+                  >
                   <p class="card-text" th:text="${posts.body}">Body</p>
-                  <a class="btn btn-primary" href="#!">Read more →</a>
+                  <a
+                    class="btn btn-primary"
+                    th:href="@{'/blog-post/' + ${posts.id}}"
+                    >Read more →</a
+                  >
                 </div>
               </div>
             </div>

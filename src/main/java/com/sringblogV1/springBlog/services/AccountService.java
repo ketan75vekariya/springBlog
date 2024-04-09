@@ -16,10 +16,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.sringblogv1.springblog.model.Account;
+import com.sringblogv1.springblog.model.Authority;
 import com.sringblogv1.springblog.repositories.AccountRepository;
 import com.sringblogv1.springblog.util.constant.Roles;
 
+import jakarta.transaction.Transactional;
+
 @Service
+@Transactional
 public class AccountService implements UserDetailsService{
   @Autowired
   private AccountRepository accountRepository;
@@ -53,6 +57,11 @@ public class AccountService implements UserDetailsService{
     Account account = optionalAccount.get();
     List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
     grantedAuthorities.add(new SimpleGrantedAuthority(account.getRole()));
+
+    for(Authority _auth: account.getAuthorities()){
+      grantedAuthorities.add(new SimpleGrantedAuthority(_auth.getName())); 
+    }
+
     return new User(account.getEmail(), account.getPassword(), grantedAuthorities);
   }
 }
