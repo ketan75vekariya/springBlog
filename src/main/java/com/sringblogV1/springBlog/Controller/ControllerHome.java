@@ -58,9 +58,5 @@ public class ControllerHome {
 
     return "view/blogs";
   }
-  @GetMapping("/blog-post")
-  public String blogPost(Model model){
-    model.addAttribute("currentPage", "blog");
-    return "view/blog_post";
-  }
+  
 }
