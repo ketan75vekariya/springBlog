@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:util="urn:java:org.thymeleaf.expression.Util"
+>
   <!--Head-->
   <head th:replace="view/fragments/head :: head" />
   <body>
@@ -29,7 +33,7 @@
                   Title
                 </h2></a
               >
-              <p class="card-text" th:text="${firstPost.body}">Body</p>
+              <p class="card-text" th:utext="${firstPost.body}">Body</p>
               <a
                 class="btn btn-primary"
                 th:href="@{'/blog-post/' + ${firstPost.id}}"
@@ -61,7 +65,12 @@
                       Title
                     </h2></a
                   >
-                  <p class="card-text" th:text="${posts.body}">Body</p>
+                  <p
+                    class="card-text"
+                    th:text="${#strings.abbreviate(posts.body, 150)}"
+                  >
+                    Body
+                  </p>
                   <a
                     class="btn btn-primary"
                     th:href="@{'/blog-post/' + ${posts.id}}"

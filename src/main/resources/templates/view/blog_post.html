@@ -41,13 +41,15 @@
             </figure>
             <!-- Post content-->
             <section class="mb-5">
-              <p class="fs-5 mb-4" th:text="${post.body}">
-                The universe is large and old, and the ingredients for life as
-                we know it are everywhere, so there's no reason to think that
-                Earth would be unique in that regard. Whether of not the life
-                became intelligent is a different question, and we'll see if we
-                find that.
-              </p>
+              <p class="fs-5 mb-4" th:utext="${post.body}"></p>
+
+              <a
+                th:href="@{'/edit-post/' + ${post.id}}"
+                sec:authorize="isAuthenticated()"
+                type="button"
+                class="btn btn-info"
+                >Edit</a
+              >
             </section>
           </article>
           <!-- Comments section-->

@@ -58,5 +58,8 @@ public class ControllerHome {
 
     return "view/blogs";
   }
-  
+  @GetMapping("/404")
+    public String getPageNotFoundErro(Model model) {
+        return "view/404";
+    }
 }

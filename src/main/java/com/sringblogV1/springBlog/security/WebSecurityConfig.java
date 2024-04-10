@@ -22,8 +22,8 @@ public class WebSecurityConfig {
     return http
               .authorizeHttpRequests(auth->{
                 try {
-                    //auth.requestMatchers("/", "/assets/**", "/css/**", "/js/**", "/about", "/contact", "/blogs", "/blog-post/**", "/admin/assets/**", "/admin/css/**", "/admin/js/**", "/404","/blog-post")
-                    auth.requestMatchers("/**")
+                    auth.requestMatchers("/", "/assets/**", "/css/**", "/js/**", "/about", "/contact", "/blogs", "/blog-post/**", "/admin/assets/**", "/admin/css/**", "/admin/js/**", "/404","/blog-post")
+                    //auth.requestMatchers("/**")
                             .permitAll()
                             .anyRequest()
                             .authenticated()

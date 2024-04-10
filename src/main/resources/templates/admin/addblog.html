@@ -11,7 +11,7 @@
         <main>
           <div class="container-fluid px-4">
             <h1 class="mt-4">Add Blog</h1>
-            <a href="/addblog" class="btn btn-primary mb-2">Add User</a>
+
             <div class="card mb-4">
               <div class="card-header">
                 <i class="fas fa-table me-1"></i>
@@ -19,13 +19,26 @@
               </div>
 
               <div class="card-body">
-                <form>
+                <form
+                  action="#"
+                  th:action="@{/addblog}"
+                  method="post"
+                  th:object="${post}"
+                >
                   <div class="form-group">
+                    <input
+                      type="hidden"
+                      id="account"
+                      name="account"
+                      th:field="*{account}"
+                    />
                     <label for="formGroupExampleInput">Title</label>
                     <input
                       type="text"
+                      id="title"
+                      name="title"
+                      th:field="*{title}"
                       class="form-control"
-                      id="formGroupExampleInput"
                       placeholder="Write your title"
                     />
                   </div>
@@ -37,6 +50,7 @@
                       <input
                         class="form-check-input"
                         type="checkbox"
+                        name="category"
                         id="inlineCheckbox1"
                         value="option1"
                       />
@@ -55,10 +69,16 @@
                     >
                     <textarea
                       class="form-control"
-                      id="exampleFormControlTextarea1"
+                      type="textarea"
+                      id="editor"
+                      name="body"
+                      th:field="*{body}"
                       rows="25"
                     ></textarea>
                   </div>
+                  <button type="submit" class="btn btn-primary my-3 mb-2">
+                    Add User
+                  </button>
                 </form>
               </div>
             </div>
@@ -83,5 +103,10 @@
       crossorigin="anonymous"
     ></script>
     <script src="admin/js/datatables-simple-demo.js"></script>
+    <!--Text Editor-->
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.3.0/classic/ckeditor.js"></script>
+    <script>
+      ClassicEditor.create(document.querySelector("#editor"));
+    </script>
   </body>
 </html>
