@@ -19,15 +19,10 @@ import com.sringblogv1.springblog.model.Post;
 import com.sringblogv1.springblog.services.AccountService;
 import com.sringblogv1.springblog.services.CategoryService;
 import com.sringblogv1.springblog.services.PostService;
-import org.springframework.web.bind.annotation.RequestParam;
-
-
-
-
 
 @Controller
 public class ControllerPost {
-  @Autowired
+    @Autowired
     private PostService postService;
     @Autowired
     private CategoryService categoryService;
@@ -35,105 +30,107 @@ public class ControllerPost {
     private AccountService accountService;
 
     @GetMapping("/blog-post/{id}") // Define a path variable named "id"
-    public String getPost(@PathVariable Long id, Model model, Principal principal) { // Use @PathVariable to capture the id
-        if(id != null){
-        Optional<Post> post = postService.getById(id);
-           // String authUser = "email";
+    public String getPost(@PathVariable Long id, Model model, Principal principal) { // Use @PathVariable to capture the
+                                                                                     // id
+        if (id != null) {
+            Optional<Post> post = postService.getById(id);
+            // String authUser = "email";
 
-        // Check if post is present in Optional
+            // Check if post is present in Optional
             if (post.isPresent()) {
                 model.addAttribute("post", post.get()); // Add the post to the model
                 /*
-                if(principal != null){
-                    authUser = principal.getName();
-                }if (authUser.equals(post.getAccount().getEmail())){
-                    model.addAttribute("isOwner", true);
-                }else{
-                    model.addAttribute("isOwner", false);
-                } */
-
-
+                 * if(principal != null){
+                 * authUser = principal.getName();
+                 * }if (authUser.equals(post.getAccount().getEmail())){
+                 * model.addAttribute("isOwner", true);
+                 * }else{
+                 * model.addAttribute("isOwner", false);
+                 * }
+                 */
 
                 return "view/blog_post";
             } else {
                 // Handle case where post is not found
                 return "view/404"; // Return an error view
             }
-        }else{
+        } else {
             return "view/404";
         }
     }
-    
+
     @GetMapping("/addblog")
     @PreAuthorize("isAuthenticated()")
-        public String addBlog(Model model, Principal principal){
+    public String addBlog(Model model, Principal principal) {
         model.addAttribute("currentPage", "blog");
         List<Category> categories = categoryService.getAll();
         model.addAttribute("categories", categories);
         String authUser = "email";
-        if(principal !=null){
+        if (principal != null) {
             authUser = principal.getName();
         }
         Optional<Account> optionalAccount = accountService.findOneByEmail(authUser);
-        if(optionalAccount.isPresent()){
+        if (optionalAccount.isPresent()) {
             Post post = new Post();
             post.setAccount(optionalAccount.get());
             model.addAttribute("post", post);
             return "admin/addblog";
-        }else{
+        } else {
             return "redirect:/";
-        }    
+        }
     }
+
     @PostMapping("/addblog")
     @PreAuthorize("isAuthenticated()")
-    public String addPostHandler(@ModelAttribute Post post, Principal principal){
-        String authUser ="email";
-        if(principal !=null){
+    public String addPostHandler(@ModelAttribute Post post, Principal principal) {
+        String authUser = "email";
+        if (principal != null) {
             authUser = principal.getName();
         }
-        if(post.getAccount().getEmail().compareToIgnoreCase(authUser) <0){
+        if (post.getAccount().getEmail().compareToIgnoreCase(authUser) < 0) {
             return "redirect:/?error";
         }
         postService.save(post);
         return "redirect:/blog-post/" + post.getId();
 
-
-   }
+    }
 
     @GetMapping("/posts/{id}/edit")
     @PreAuthorize("isAuthenticated()")
     public String getPostForEdit(@PathVariable Long id, Model model) {
-        Optional <Post> optionalPost = postService.getById(id);
-        if (optionalPost.isPresent()){
+        Optional<Post> optionalPost = postService.getById(id);
+        if (optionalPost.isPresent()) {
             Post post = optionalPost.get();
             model.addAttribute("post", post);
             return "admin/postedit";
-        }else{
+        } else {
             return "/404";
         }
     }
+
     @PostMapping("/posts/{id}/edit")
     @PreAuthorize("isAuthenticated()")
-    public String updatePost(@PathVariable  Long id, @ModelAttribute Post post){
-        Optional <Post> optionalPost = postService.getById(id);
-        if(optionalPost.isPresent()){
+    public String updatePost(@PathVariable Long id, @ModelAttribute Post post) {
+        Optional<Post> optionalPost = postService.getById(id);
+        if (optionalPost.isPresent()) {
             Post existingPost = optionalPost.get();
             existingPost.setTitle(post.getTitle());
             existingPost.setBody(post.getBody());
             postService.save(existingPost);
         }
-        return "redirect:/blog-post/"+post.getId();
+        return "redirect:/blog-post/" + post.getId();
     }
+
     @GetMapping("/posts/{id}/delete")
     @PreAuthorize("isAuthenticated()")
-    public String deletePost(@PathVariable Long id){
-        Optional <Post> optionalPost = postService.getById(id);
-        if(optionalPost.isPresent()){
+    public String deletePost(@PathVariable Long id) {
+        Optional<Post> optionalPost = postService.getById(id);
+        if (optionalPost.isPresent()) {
             Post post = optionalPost.get();
             postService.delete(post);
             return "redirect:/adminblogs";
         }
         return "redirect:/adminblogs?error";
     }
-    
+
 }
