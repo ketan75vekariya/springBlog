@@ -22,7 +22,7 @@
                     <form
                       action="#"
                       method="post"
-                      th:action="@{/addcategories}"
+                      th:action="@{'/category/{id}/edit' (id=${category.id})}"
                       th:object="${category}"
                     >
                       <div class="row mb-3">

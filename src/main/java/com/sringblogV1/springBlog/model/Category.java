@@ -20,8 +20,8 @@ public class Category {
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private long id;
 
-  private String category;
+  private String categoryName;
 
   private LocalDateTime createdAt;
-  
+
 }
