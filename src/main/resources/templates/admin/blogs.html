@@ -39,8 +39,10 @@
                   <tbody>
                     <tr th:each="posts:${posts}">
                       <td th:text="${posts.title}"></td>
-                      <td th:text="${posts.title}"></td>
-                      <td th:text="${posts.createdAt}"></td>
+                      <td th:utext="${#strings.abbreviate(posts.body, 150)}"</td>
+                      <td
+                        th:text="${#temporals.format(posts.createdAt, 'yyyy-MM-dd HH:mm')}"
+                      ></td>
                       <td>
                         <div
                           class="btn-group mr-2"
@@ -51,7 +53,7 @@
                             <i class="fa fa-eye" aria-hidden="true"></i>
                           </a>
                           <a
-                            th:href="@{'/edit-post/' + ${posts.id}}"
+                            th:href="@{'/posts/' + ${posts.id} + '/edit'}"
                             class="btn btn-warning"
                           >
                             <i class="fa fa-pencil" aria-hidden="true"></i>

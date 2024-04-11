@@ -25,7 +25,10 @@
                 alt="..."
             /></a>
             <div class="card-body">
-              <div class="small text-muted" th:text="${firstPost.createdAt}">
+              <div
+                class="small text-muted"
+                th:text="${#temporals.format(firstPost.createdAt, 'yyyy-MM-dd HH:mm')}"
+              >
                 Date
               </div>
               <a th:href="@{'/blog-post/' + ${firstPost.id}}"
@@ -58,7 +61,7 @@
                 <div class="card-body">
                   <div
                     class="small text-muted"
-                    th:text="${posts.createdAt}"
+                    th:text="${#temporals.format(posts.createdAt, 'yyyy-MM-dd HH:mm')}"
                   ></div>
                   <a th:href="@{'/blog-post/' + ${posts.id}}"
                     ><h2 class="card-title h4" th:text="${posts.title}">
@@ -67,7 +70,7 @@
                   >
                   <p
                     class="card-text"
-                    th:text="${#strings.abbreviate(posts.body, 150)}"
+                    th:utext="${#strings.abbreviate(posts.body, 150)}"
                   >
                     Body
                   </p>

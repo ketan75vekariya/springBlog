@@ -19,6 +19,8 @@ import com.sringblogv1.springblog.model.Post;
 import com.sringblogv1.springblog.services.AccountService;
 import com.sringblogv1.springblog.services.CategoryService;
 import com.sringblogv1.springblog.services.PostService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -98,7 +100,29 @@ public class ControllerPost {
 
    }
 
-    
-    
+    @GetMapping("/posts/{id}/edit")
+    @PreAuthorize("isAuthenticated()")
+    public String getPostForEdit(@PathVariable Long id, Model model) {
+        Optional <Post> optionalPost = postService.getById(id);
+        if (optionalPost.isPresent()){
+            Post post = optionalPost.get();
+            model.addAttribute("post", post);
+            return "admin/postedit";
+        }else{
+            return "/404";
+        }
+    }
+    @PostMapping("/posts/{id}/edit")
+    @PreAuthorize("isAuthenticated()")
+    public String updatePost(@PathVariable  Long id, @ModelAttribute Post post){
+        Optional <Post> optionalPost = postService.getById(id);
+        if(optionalPost.isPresent()){
+            Post existingPost = optionalPost.get();
+            existingPost.setTitle(post.getTitle());
+            existingPost.setBody(post.getBody());
+            postService.save(existingPost);
+        }
+        return "redirect:/blog-post/"+post.getId();
+    }
     
 }

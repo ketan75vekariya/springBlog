@@ -17,7 +17,7 @@
               <!-- Post meta content-->
               <div
                 class="text-muted fst-italic mb-2"
-                th:text="${post.createdAt}"
+                th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"
               ></div>
               <!-- Post categories-->
               <a
@@ -44,7 +44,7 @@
               <p class="fs-5 mb-4" th:utext="${post.body}"></p>
 
               <a
-                th:href="@{'/edit-post/' + ${post.id}}"
+                th:href="@{'/posts/' + ${post.id} + '/edit'}"
                 sec:authorize="isAuthenticated()"
                 type="button"
                 class="btn btn-info"
