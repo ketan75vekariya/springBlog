@@ -13,6 +13,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,12 +29,15 @@ public class Account {
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private long id;
 
+  @Email(message = "Invalid Email")
+  @NotEmpty(message = "Email Missing")
   private String email;
 
+  @NotEmpty(message = "Password Missing")
   private String password;
 
   private String firstname;
-  
+
   private String lastname;
 
   private String role;
@@ -42,13 +47,10 @@ public class Account {
   @OneToMany(mappedBy = "account")
   private List<Post> posts;
 
-
   @ManyToMany
-  @JoinTable(
-    name="account_authority",
-    joinColumns = {@JoinColumn(name = "account_id", referencedColumnName = "id")},
-    inverseJoinColumns = {@JoinColumn(name = "authority_id", referencedColumnName = "id")})
-    private Set<Authority> authorities = new HashSet<>();
-  
+  @JoinTable(name = "account_authority", joinColumns = {
+      @JoinColumn(name = "account_id", referencedColumnName = "id") }, inverseJoinColumns = {
+          @JoinColumn(name = "authority_id", referencedColumnName = "id") })
+  private Set<Authority> authorities = new HashSet<>();
 
 }

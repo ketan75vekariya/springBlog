@@ -141,7 +141,9 @@
                     class="list-unstyled mb-0"
                     th:each="categories:${categories}"
                   >
-                    <li><a href="#!" th:text="${categories.category}"></a></li>
+                    <li>
+                      <a href="#!" th:text="${categories.categoryName}"></a>
+                    </li>
                   </ul>
                 </div>
               </div>

@@ -54,12 +54,22 @@
                       <div class="form-floating mb-3">
                         <input
                           class="form-control"
+                          name="email"
                           id="email"
                           th:field="*{email}"
                           type="email"
                           placeholder="name@example.com"
                         />
                         <label for="inputEmail">Email address</label>
+
+                        <p
+                          th:if="${#fields.hasErrors('email')}"
+                          th:error="*{email}"
+                          class="alert alert-danger"
+                          role="alert"
+                        >
+                          Email Error
+                        </p>
                       </div>
                       <div class="row mb-3">
                         <div class="col-md-6">
