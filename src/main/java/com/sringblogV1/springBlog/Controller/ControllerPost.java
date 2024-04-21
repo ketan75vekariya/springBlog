@@ -34,6 +34,8 @@ public class ControllerPost {
                                                                                      // id
         if (id != null) {
             Optional<Post> post = postService.getById(id);
+            List<Category> categories = categoryService.getAll();
+            model.addAttribute("categories", categories);
             // String authUser = "email";
 
             // Check if post is present in Optional

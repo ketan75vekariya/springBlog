@@ -1,5 +1,6 @@
 package com.sringblogv1.springblog.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
@@ -54,7 +55,7 @@ public class Account {
   private int age;
 
   @DateTimeFormat(pattern = "yyyy-MM-dd")
-  private LocalDateTime date_of_birth;
+  private LocalDate date_of_birth;
 
   private String photo;
   private LocalDateTime createdAt;
