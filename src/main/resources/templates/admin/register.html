@@ -31,11 +31,20 @@
                             <input
                               class="form-control"
                               id="firstname"
-                              th:field="*{firstname}"
+                              name="firstname"
                               type="text"
                               placeholder="Enter your first name"
+                              required
                             />
                             <label for="inputFirstName">First name</label>
+                            <p
+                              th:if="${#fields.hasErrors('firstname')}"
+                              th:error="*{firstname}"
+                              class="alert alert-danger"
+                              role="alert"
+                            >
+                              Please input the valid name
+                            </p>
                           </div>
                         </div>
                         <div class="col-md-6">
@@ -43,20 +52,104 @@
                             <input
                               class="form-control"
                               id="lastname"
-                              th:field="*{lastname}"
+                              name="lastname"
                               type="text"
                               placeholder="Enter your last name"
+                              required
                             />
                             <label for="inputLastName">Last name</label>
+                            <p
+                              th:if="${#fields.hasErrors('lastname')}"
+                              th:error="*{lastname}"
+                              class="alert alert-danger"
+                              role="alert"
+                            >
+                              Please input the valid surname
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <div class="col-md-6">
+                          <div class="form-floating mb-3 mb-md-0">
+                            <select
+                              class="form-select"
+                              aria-label="Default select example"
+                              id="gender"
+                              name="gender"
+                            >
+                              <option value="male">Male</option>
+                              <option value="female">Female</option>
+                              <option value="other">Other</option>
+                            </select>
+                            <label for="inputLastName">Gender</label>
+                          </div>
+                        </div>
+                        <!--  <div class="col-md-6">
+                          <div class="form-floating">
+                            <input
+                              class="form-control"
+                              id="date_of_birth"
+                              th:field="*{date_of_birth}"
+                              type="date"
+                              placeholder="Enter your birthdate"
+                              required
+                            />
+                            <label for="date_of_birth">Date Of Birth</label>
+                            <p
+                              th:if="${#fields.hasErrors('date_of_birth')}"
+                              th:error="*{date_of_birth}"
+                              class="alert alert-danger"
+                              role="alert"
+                            >
+                              Please input the birthdate
+                            </p>
+                          </div>
+                        </div> -->
+                      </div>
+                      <div class="row mb-3">
+                        <!-- <div class="col-md-6">
+                          <div class="form-floating mb-3">
+                            <input
+                              class="form-control"
+                              name="photo"
+                              id="photo"
+                              th:field="*{photo}"
+                              type="file"
+                              placeholder="Enter Profile Photo"
+                            />
+                            <label for="inputLastName">Profile Picture</label>
+                          </div>
+                        </div> -->
+                        <div class="col-md-6">
+                          <div class="form-floating">
+                            <input
+                              class="form-control"
+                              id="age"
+                              name="age"
+                              type="number"
+                              placeholder="Enter your age"
+                              min="18"
+                              max="99"
+                              required
+                            />
+                            <label for="inputLastName">age</label>
+                            <p
+                              th:if="${#fields.hasErrors('age')}"
+                              th:error="*{age}"
+                              class="alert alert-danger"
+                              role="alert"
+                            >
+                              Please input age between 18 to 99
+                            </p>
                           </div>
                         </div>
                       </div>
                       <div class="form-floating mb-3">
                         <input
                           class="form-control"
-                          name="email"
                           id="email"
-                          th:field="*{email}"
+                          name="email"
                           type="email"
                           placeholder="name@example.com"
                         />
@@ -68,7 +161,7 @@
                           class="alert alert-danger"
                           role="alert"
                         >
-                          Email Error
+                          Please input the valid email
                         </p>
                       </div>
                       <div class="row mb-3">
@@ -76,19 +169,29 @@
                           <div class="form-floating mb-3 mb-md-0">
                             <input
                               class="form-control"
-                              id="inputPassword"
-                              th:field="*{password}"
+                              id="password"
+                              name="password"
                               type="password"
                               placeholder="Create a password"
+                              required
                             />
                             <label for="inputPassword">Password</label>
+                            <p
+                              th:if="${#fields.hasErrors('password')}"
+                              th:error="*{password}"
+                              class="alert alert-danger"
+                              role="alert"
+                            >
+                              Please input Password
+                            </p>
                           </div>
                         </div>
                         <div class="col-md-6">
                           <div class="form-floating mb-3 mb-md-0">
                             <input
                               class="form-control"
-                              id="inputPasswordConfirm"
+                              id="confirmPassword"
+                              name="confirmPassword"
                               type="password"
                               placeholder="Confirm password"
                             />
